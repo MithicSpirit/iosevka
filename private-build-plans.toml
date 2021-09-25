@@ -14,7 +14,7 @@
 ### Configuration
 [buildPlans.iosevka-mithic]
 family = "Iosevka Mithic"
-spacing = "term"
+spacing = "fontconfig-mono"
 serifs = "sans"
 no-cv-ss = false
 
@@ -25,8 +25,7 @@ no-cv-ss = false
     capital-g = "toothed-serifless-hooked"
     capital-k = "straight-serifless"
     capital-m = "hanging"
-    a = "double-storey-tailed"
-    d = "tailed-serifless"
+    a = "double-storey-serifless"
     f = "flat-hook-crossbar-at-x-height"
     g = "double-storey"
     k = "straight-serifless"
