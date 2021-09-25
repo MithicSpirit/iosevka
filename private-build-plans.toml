@@ -1,0 +1,158 @@
+# v10.3.0
+
+### Building font
+# First run:
+#   npm install
+# Then
+# - Everything (TTF + Web Font):
+#   npm run build -- contents::iosevka-mithic
+# - TTF (hinted):
+#   npm run build -- ttf::iosevka-mithic
+# - Unhinted TTF:
+#   npm run build -- ttf-unhinted::iosevka-mithic
+
+### Configuration
+[buildPlans.iosevka-mithic]
+family = "Iosevka Mithic"
+spacing = "term"
+serifs = "sans"
+no-cv-ss = false
+
+  [buildPlans.iosevka-mithic.variants]
+  inherits = "ss05"
+
+    [buildPlans.iosevka-mithic.variants.design]
+    capital-g = "toothed-serifless-hooked"
+    capital-k = "straight-serifless"
+    capital-m = "hanging"
+    a = "double-storey-tailed"
+    d = "tailed-serifless"
+    f = "flat-hook-crossbar-at-x-height"
+    g = "double-storey"
+    k = "straight-serifless"
+    r = "serifed"
+    t = "flat-hook"
+    long-s = "flat-hook-tailed"
+    eszet = "sulzbacher-tailed"
+    lower-delta = "flat-top"
+    capital-gamma = "top-right-serifed"
+    lower-iota = "tailed"
+    lower-lambda = "straight"
+    lower-mu = "tailed"
+    zero = "slashed"
+    four = "closed"
+    underscore = "high"
+    paragraph-sign = "high"
+    caret = "low"
+    brace = "straight"
+    number-sign = "upright"
+    ampersand = "closed"
+    at = "fourfold"
+    dollar = "open"
+    lig-ltgteq = "flat"
+    punctuation-dot = "square" # TEST
+
+    [buildPlans.iosevka-mithic.variants.italic]
+    a = "double-storey-serifless"
+    b = "toothless-corner"
+    d = "toothed-serifless"
+    f = "flat-hook-extended-crossbar-at-x-height"
+    g = "earless-corner"
+    i = "serifed-flat-tailed"
+    k = "diagonal-tailed-cursive-serifless"
+    l = "serifed-flat-tailed"
+    n = "straight"
+    q = "earless-corner"
+    r = "serifless"
+    v = "cursive"
+    w = "cursive"
+    y = "cursive"
+    zero = "dotted"
+    one = "no-base"
+    six = "straight-bar"
+    nine = "straight-bar"
+    underscore = "above-baseline"
+    ampersand = "upper-open"
+    at = "threefold"
+    percent = "dots"
+    bar = "force-upright"
+    ascii-single-quote = "raised-comma"
+    ascii-grave = "raised-turn-comma"
+    punctuation-dot = "round" # TEST
+
+  [buildPlans.iosevka-mithic.ligations]
+  enables = [
+    "center-ops",
+	"arrow",
+    "arrow2",
+    "eqeq",
+    "ineq",
+    "exeq",
+    "tildeeq",
+	"brst",
+    "plusplus",
+    "kern-dotty",
+    "kern-bars",
+    "llgg",
+    "llggeq",
+    "html-comment",
+    "connected-underscore",
+    "connected-number-sign",
+    "connected-tilde-as-wave",
+    # (broken) "connected-hyphen-as-semi-dashed-line",
+  ]
+
+[buildPlans.iosevka-mithic.weights.thin]
+shape = 100
+menu = 100
+css = 100
+
+[buildPlans.iosevka-mithic.weights.extralight]
+shape = 200
+menu = 200
+css = 200
+
+[buildPlans.iosevka-mithic.weights.light]
+shape = 300
+menu = 300
+css = 300
+
+[buildPlans.iosevka-mithic.weights.regular]
+shape = 450
+menu = 450
+css = 450
+
+[buildPlans.iosevka-mithic.weights.book]
+shape = 450
+menu = 450
+css = 450
+
+[buildPlans.iosevka-mithic.weights.medium]
+shape = 525
+menu = 525
+css = 525
+
+[buildPlans.iosevka-mithic.weights.semibold]
+shape = 600
+menu = 600
+css = 600
+
+[buildPlans.iosevka-mithic.weights.bold]
+shape = 700
+menu = 700
+css = 700
+
+[buildPlans.iosevka-mithic.weights.extrabold]
+shape = 800
+menu = 800
+css = 800
+
+[buildPlans.iosevka-mithic.weights.heavy]
+shape = 900
+menu = 900
+css = 900
+
+[buildPlans.iosevka-mithic.widths.normal]
+shape = 576
+menu = 5
+css = "normal"
