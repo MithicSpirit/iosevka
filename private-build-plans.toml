@@ -49,7 +49,7 @@ no-cv-ss = false
     at = "fourfold"
     dollar = "open"
     lig-ltgteq = "flat"
-    punctuation-dot = "square" # TEST
+    punctuation-dot = "square"
 
     [buildPlans.iosevka-mithic.variants.italic]
     a = "double-storey-serifless"
@@ -63,8 +63,6 @@ no-cv-ss = false
     n = "straight"
     q = "earless-corner"
     r = "serifless"
-    v = "cursive"
-    w = "cursive"
     y = "cursive"
     zero = "dotted"
     one = "no-base"
@@ -77,7 +75,7 @@ no-cv-ss = false
     bar = "force-upright"
     ascii-single-quote = "raised-comma"
     ascii-grave = "raised-turn-comma"
-    punctuation-dot = "round" # TEST
+    punctuation-dot = "round"
 
   [buildPlans.iosevka-mithic.ligations]
   enables = [
