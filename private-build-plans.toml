@@ -24,6 +24,7 @@ export-glyph-names = true
   inherits = "ss05"
 
     [buildPlans.iosevka-mithic.variants.design]
+	capital-d = "standard-serifless"
     capital-g = "toothed-serifless-hooked"
     capital-k = "straight-serifless"
     capital-m = "hanging"
