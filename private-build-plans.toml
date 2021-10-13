@@ -32,7 +32,6 @@ export-glyph-names = true
     f = "flat-hook-crossbar-at-x-height"
     g = "double-storey"
     k = "straight-serifless"
-    l = "serifed"
     r = "serifed"
     t = "flat-hook"
     long-s = "flat-hook-tailed"
