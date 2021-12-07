@@ -117,7 +117,7 @@ css = 300
 
 [buildPlans.iosevka-mithic.weights.regular]
 shape = 450
-menu = 450
+menu = 400
 css = 450
 
 [buildPlans.iosevka-mithic.weights.book]
@@ -127,7 +127,7 @@ css = 450
 
 [buildPlans.iosevka-mithic.weights.medium]
 shape = 525
-menu = 525
+menu = 500
 css = 525
 
 [buildPlans.iosevka-mithic.weights.semibold]
