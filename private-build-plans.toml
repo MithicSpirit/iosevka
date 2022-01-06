@@ -151,6 +151,6 @@ menu = 900
 css = 900
 
 [buildPlans.iosevka-mithic.widths.normal]
-shape = 550
+shape = 525
 menu = 5
 css = "normal"
