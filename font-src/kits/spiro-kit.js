@@ -255,7 +255,7 @@ exports.SetupBuilders = function (bindings) {
 		}
 	}
 	function prepareSpiroKnots(_knots, s) {
-		let knots = _knots;
+		let knots = [..._knots];
 		while (knots[0] && knots[0] instanceof Function) {
 			knots[0].call(s);
 			knots.splice(0, 1);
@@ -291,7 +291,7 @@ exports.SetupBuilders = function (bindings) {
 		return function () {
 			const gizmo = this.gizmo || GlobalTransform;
 			const collector = new BiKnotCollector(gizmo, Contrast);
-			const { knots, closed } = prepareSpiroKnots([].slice.call(args, 0), collector);
+			const { knots, closed } = prepareSpiroKnots(args, collector);
 			for (const knot of knots) {
 				collector.pushKnot(knot.type, knot.x, knot.y);
 				if (knot.af) knot.af.call(collector);
