@@ -1,5 +1,7 @@
 "use strict";
 
+const crypto = require("crypto");
+
 const Dotless = {
 	tag: "dtls",
 	get(glyph) {
@@ -31,9 +33,32 @@ function SimpleProp(key) {
 }
 
 const LowerYDotAtBelow = SimpleProp("LowerYDotAtBelow");
-const DollarShrinkKernel = SimpleProp("DollarShrinkKernel");
-const DollarShorterBar = SimpleProp("DollarShorterBar");
+const RightDependentTrigger = SimpleProp("RightDependentTrigger");
 const MathSansSerif = SimpleProp("MathSansSerif");
+
+function DependentLinkProp(key) {
+	return {
+		get(glyph, subKey) {
+			if (glyph && glyph.related && glyph.related[key]) {
+				return glyph.related[key][subKey];
+			} else {
+				return null;
+			}
+		},
+		getAll(glyph) {
+			if (glyph && glyph.related) return glyph.related[key];
+			else return null;
+		},
+		set(glyph, subKey, toGid) {
+			if (typeof toGid !== "string") throw new Error("Must supply a GID instead of a glyph");
+			if (!glyph.related) glyph.related = {};
+			if (!glyph.related[key]) glyph.related[key] = {};
+			glyph.related[key][subKey] = toGid;
+		}
+	};
+}
+
+const RightDependentLink = DependentLinkProp("RightDependentLink");
 
 function OtlTaggedProp(key, otlTag) {
 	return { ...SimpleProp(key), otlTag };
@@ -436,6 +461,14 @@ function linkSuffixPairGr(gs, tagCis, tagTrans, grCis, grTrans) {
 	}
 }
 
+function hashCv(g) {
+	const hasher = crypto.createHash("sha256");
+	for (const gr of AnyCv.query(g)) {
+		hasher.update(`${gr.tag}/${gr.rank}:${gr.get(g)}\n`);
+	}
+	return hasher.digest("hex");
+}
+
 exports.Dotless = Dotless;
 exports.LowerYDotAtBelow = LowerYDotAtBelow;
 exports.Cv = Cv;
@@ -451,8 +484,8 @@ exports.Joining = Joining;
 exports.AnyDerivingCv = AnyDerivingCv;
 exports.CcmpDecompose = CcmpDecompose;
 exports.CvDecompose = CvDecompose;
-exports.DollarShrinkKernel = DollarShrinkKernel;
-exports.DollarShorterBar = DollarShorterBar;
+exports.RightDependentLink = RightDependentLink;
+exports.RightDependentTrigger = RightDependentTrigger;
 exports.MathSansSerif = MathSansSerif;
 exports.Nwid = Nwid;
 exports.Wwid = Wwid;
@@ -461,9 +494,10 @@ exports.Onum = Onum;
 exports.AplForm = AplForm;
 exports.NumeratorForm = NumeratorForm;
 exports.DenominatorForm = DenominatorForm;
+exports.hashCv = hashCv;
 
 exports.createGrDisplaySheet = createGrDisplaySheet;
 exports.linkSuffixGr = linkSuffixGr;
 exports.linkSuffixPairGr = linkSuffixPairGr;
 
-exports.SvInheritableRelations = [DollarShrinkKernel, DollarShorterBar, Joining];
+exports.SvInheritableRelations = [RightDependentLink, RightDependentTrigger, Joining];
