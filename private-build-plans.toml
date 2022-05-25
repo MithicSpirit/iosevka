@@ -40,6 +40,7 @@ export-glyph-names = true
     dollar = "open"
     lig-ltgteq = "flat"
     punctuation-dot = "square"
+    diacritic-dot = "square"
 
     [buildPlans.iosevka-mithic.variants.italic]
     a = "single-storey-earless-corner-serifless"
@@ -77,6 +78,7 @@ export-glyph-names = true
     ascii-single-quote = "raised-comma"
     ascii-grave = "raised-turn-comma"
     punctuation-dot = "round"
+    diacritic-dot = "round"
 
   [buildPlans.iosevka-mithic.ligations]
   enables = [
