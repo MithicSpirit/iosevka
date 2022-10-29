@@ -915,7 +915,6 @@ glyph-block Autobuild-Fractions : begin
 				set-mark-anchor 'fracBuildUp' 0 0 offset (-(CAP * scaleFactor + gap))
 
 	define [createFractions records]        : createFracImpl 'frac'      records : FractionLayout CAP [AdviceStroke 3] 0.55 0.05
-	define [createPowerlineStacks records]  : createFracImpl 'pwlStack'  records : FractionLayout CAP 0 0.6 0.15
 	define [createFractionsSmall records]   : createFracImpl 'fracSmall' records : FractionLayout XH [AdviceStroke 3] 0.55 0.05
 	define [createControlPictures2 records] : createFracImpl 'ctrlPict2' records : ControlPictureLayout 3.75 0.55  0.2
 	define [createControlPictures3 records] : createFracImpl 'ctrlPict3' records : ControlPictureLayout 5    0.375 0.1
@@ -948,12 +947,9 @@ glyph-block Autobuild-Fractions : begin
 		list 0x2105 { 'c' 'o' }
 		list 0x2106 { 'c' 'u' }
 
-	createPowerlineStacks : list
-		# Powerline LN symbol
-		list 0xE0A1 { 'L' 'N' }
-		list 0xE0A3 { 'C' 'N' }
-
 	createControlPictures2 : list
+		list 0xE0A1 {"L" "N"}
+		list 0xE0A3 {"C" "N"}
 		list 0x2408 {"B" "S"}
 		list 0x2409 {"H" "T"}
 		list 0x240A {"L" "F"}
@@ -1186,7 +1182,7 @@ glyph-block Autobuild-Ligatures : begin
 		list 0x1F3 { 'd' 'z' }
 		list 0x478 { 'O' 'y' }
 		list 0x479 { 'o' 'y' }
-		list 0x20A7 { 'P' 't.flatHook' }
+		list 0x20A7 { 'P' 't' }
 		list 0x20A8 { 'R' 's' }
 		list 0x20AF { 'D' 'grek/rho' }
 		list 0x2116 { 'N' 'numeroRightHalf' }
