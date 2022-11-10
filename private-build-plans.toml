@@ -161,3 +161,6 @@ css = 900
 shape = 576
 menu = 5
 css = "normal"
+
+[collectPlans.iosevka-mithic]
+from = ["iosevka-mithic"]
