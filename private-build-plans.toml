@@ -93,6 +93,7 @@ export-glyph-names = true
     "eqslasheq",
     "ltgt-diamond",
     "brst",
+    "slash-asterisk",
     "plusplus",
     "kern-dotty",
     "kern-bars",
