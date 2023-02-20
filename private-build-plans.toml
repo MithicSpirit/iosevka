@@ -41,6 +41,12 @@ export-glyph-names = true
     lig-ltgteq = "flat"
     punctuation-dot = "square"
     diacritic-dot = "square"
+    lig-ltgeq = 'flat'
+    lig-neq = 'slightly-slanted'
+    lig-equal-chain = 'with-notch'
+    lig-hyphen-chain = 'with-notch'
+    lig-double-arrow-bar = 'with-notch'
+    lig-single-arrow-bar = 'with-notch'
 
     [buildPlans.iosevka-mithic.variants.italic]
     a = "single-storey-earless-corner-serifless"
@@ -105,7 +111,7 @@ export-glyph-names = true
     "connected-underscore",
     "connected-number-sign",
     "connected-tilde-as-wave",
-    "connected-hyphen-as-semi-dashed-line",
+    "connected-hyphen",
   ]
 
 [buildPlans.iosevka-mithic.weights.thin]
