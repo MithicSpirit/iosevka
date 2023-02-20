@@ -52,14 +52,9 @@ export : define [calculateMetrics para] : begin
 
 	# Orient parameters
 	define Upward    : new Point Point.Type.Corner (-HVContrast)  0
-	define Downward  : new Point Point.Type.Corner HVContrast  0
-	define Rightward : new Point Point.Type.Corner TanSlope  1
-	define Leftward  : new Point Point.Type.Corner (- TanSlope) (-1)
-
-	define [UpwardT]    : new Point Point.Type.Corner (-HVContrast)  0
-	define [DownwardT]  : new Point Point.Type.Corner HVContrast  0
-	define [RightwardT] : new Point Point.Type.Corner this.gizmo.yx  1
-	define [LeftwardT]  : new Point Point.Type.Corner (- this.gizmo.yx) (-1)
+	define Downward  : new Point Point.Type.Corner   HVContrast   0
+	define Rightward : new Point Point.Type.Corner   0            1
+	define Leftward  : new Point Point.Type.Corner   0          (-1)
 
 	# Style parameters
 	define O para.overshoot
@@ -185,28 +180,19 @@ export : define [calculateMetrics para] : begin
 		1 - [Math.pow x [fallback superness DesignParameters.superness]]
 		1 / [fallback superness DesignParameters.superness]
 
-	define [adviceSSmooth y sign _stroke] : begin
-		# Handle with extreme care.
-		local stroke : fallback _stroke Stroke
-		local strokeFactor : stroke * [clamp 1 2 : linreg 126 1 137 1.025 stroke] * [clamp 0 1 : Math.pow (Width / HalfUPM) 0.5]
-		local widthFactor : RightSB - SB
-		local ss : y * 0.21 + 0.375 * strokeFactor + 0.035 * widthFactor
-		return : ss + sign * TanSlope * (SmoothAdjust + 0.75 * stroke)
-
 	define [AdviceGlottalStopArchDepth y sign] : begin
 		return : ((y - Stroke) * 0.24 + Stroke * 0.625) + sign * TanSlope * SmoothAdjust
 
-	define [shoulderMidSlope _fine _stroke _dir] : begin
+	define [shoulderMidSkew _fine _stroke] : begin
 		local stroke : fallback _stroke Stroke
 		local fine : fallback _fine ShoulderFine
-		local dir : fallback _dir 1
-		return : 0.5 * HVContrast * (stroke - fine) / stroke + dir * TanSlope
+		return : 0.5 * Contrast * (stroke - fine) / stroke
 
 	return [object
 		DesignParameters UPM HalfUPM Width SB CAP XH Ascender Descender Contrast SymbolMid
 		ParenTop ParenBot OperTop OperBot TackTop TackBot PlusTop PlusBot PictTop PictBot BgOpTop
 		BgOpBot Italify Upright Scale Translate ApparentTranslate Rotate GlobalTransform TanSlope
-		HVContrast Upward Downward Rightward Leftward UpwardT DownwardT LeftwardT RightwardT O OX
+		HVContrast Upward Downward Rightward Leftward O OX
 		OXHook Hook AHook SHook RHook JHook FHook HookX ArchDepth SmallArchDepth Stroke DotSize
 		PeriodSize HBarPos OverlayPos LongJut Jut VJut VJutStroke AccentStackOffset AccentWidth
 		AccentClearance AccentHeight CThin CThinB SLAB TailAdjX TailAdjY IBalance IBalance2
@@ -215,7 +201,7 @@ export : define [calculateMetrics para] : begin
 		RightSB Middle DotRadius PeriodRadius SideJut ArchDepthA ArchDepthB SmallArchDepthA
 		SmallArchDepthB CorrectionOMidX CorrectionOMidS ArchXAdjust compositeBaseAnchors
 		AdviceStroke AdviceStroke2 OverlayStroke OperatorStroke GeometryStroke ShoulderFine
-		_SuperXY adviceSSmooth AdviceGlottalStopArchDepth shoulderMidSlope StrokeWidthBlend
+		_SuperXY AdviceGlottalStopArchDepth shoulderMidSkew StrokeWidthBlend
 		ArchDepthAOf ArchDepthBOf SmoothAdjust MidJutSide MidJutCenter YSmoothMidR YSmoothMidL
 		HSwToV NarrowUnicodeT WideUnicodeT]
 
@@ -415,7 +401,8 @@ export : define [GenDivFrame metrics] : begin
 		public [new _div _hPack _sbMul] : begin
 			local div : fallback _div 1
 			local hPack : Math.max 1 [fallback _hPack 0]
-			local sbMul : fallback _sbMul : Math.min 1 : (metrics.Width * div - hPack * [metrics.AdviceStroke hPack div]) / (2 * hPack * metrics.SB)
+			local mvs   : if _hPack [metrics.AdviceStroke _hPack div] metrics.Stroke
+			local sbMul : fallback _sbMul : Math.min 1 : (metrics.Width * div - hPack * mvs) / (2 * hPack * metrics.SB)
 
 			set this.div            div
 			set this.width        : metrics.Width * div
@@ -423,7 +410,7 @@ export : define [GenDivFrame metrics] : begin
 			set this.sb           : metrics.SB * sbMul
 			set this.leftSB       : metrics.SB * sbMul
 			set this.rightSB      : metrics.Width * div - metrics.SB * sbMul
-			set this.mvs          : metrics.AdviceStroke hPack div
+			set this.mvs            mvs
 			set this.markSet      : MarksetDiv div sbMul metrics
 
 		public [applyToGlyph g] : begin

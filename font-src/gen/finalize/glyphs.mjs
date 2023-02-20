@@ -7,6 +7,14 @@ import { Transform } from "../../support/geometry/transform.mjs";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+export function finalizeGlyphs(cache, para, glyphStore) {
+	const skew = Math.tan(((para.slopeAngle || 0) / 180) * Math.PI);
+	regulateGlyphStore(cache, skew, glyphStore);
+	return glyphStore;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 function regulateGlyphStore(cache, skew, glyphStore) {
 	const compositeMemo = new Map();
 	for (const g of glyphStore.glyphs()) {
@@ -55,22 +63,27 @@ function flattenSimpleGlyph(cache, skew, g) {
 		g.includeContours(CurveUtil.repToShape(cached), 0, 0);
 		cache.refreshGF(ck);
 	} else {
-		let gSimplified;
-		if (skew) {
-			const tfBack = g.gizmo ? g.gizmo.inverse() : new Transform(1, -skew, 0, 1, 0, 0);
-			const tfForward = g.gizmo ? g.gizmo : new Transform(1, +skew, 0, 1, 0, 0);
-			gSimplified = new Geom.TransformedGeometry(
-				new SimplifyGeometry(new Geom.TransformedGeometry(g.geometry, tfBack)),
-				tfForward
-			);
-		} else {
-			gSimplified = new SimplifyGeometry(g.geometry);
-		}
+		try {
+			let gSimplified;
+			if (skew) {
+				const tfBack = g.gizmo ? g.gizmo.inverse() : new Transform(1, -skew, 0, 1, 0, 0);
+				const tfForward = g.gizmo ? g.gizmo : new Transform(1, +skew, 0, 1, 0, 0);
+				gSimplified = new Geom.TransformedGeometry(
+					new SimplifyGeometry(new Geom.TransformedGeometry(g.geometry, tfBack)),
+					tfForward
+				);
+			} else {
+				gSimplified = new SimplifyGeometry(g.geometry);
+			}
 
-		const cs = gSimplified.asContours();
-		g.clearGeometry();
-		g.includeContours(cs, 0, 0);
-		if (ck) cache.saveGF(ck, CurveUtil.shapeToRep(cs));
+			const cs = gSimplified.asContours();
+			g.clearGeometry();
+			g.includeContours(cs, 0, 0);
+			if (ck) cache.saveGF(ck, CurveUtil.shapeToRep(cs));
+		} catch (e) {
+			console.error("Detected broken geometry when processing", g._m_identifier);
+			throw e;
+		}
 	}
 }
 
@@ -88,7 +101,7 @@ class SimplifyGeometry extends Geom.GeometryBase {
 	}
 	asContours() {
 		const source = this.m_geom.asContours();
-		const sink = new FairizedShapeSink();
+		const sink = new QuadifySink();
 		TypoGeom.ShapeConv.transferGenericShape(
 			TypoGeom.Fairize.fairizeBezierShape(
 				TypoGeom.Boolean.removeOverlap(
@@ -120,7 +133,8 @@ class SimplifyGeometry extends Geom.GeometryBase {
 		return `SimplifyGeometry{${sTarget}}`;
 	}
 }
-class FairizedShapeSink {
+
+class QuadifySink {
 	constructor() {
 		this.contours = [];
 		this.lastContour = [];
@@ -128,8 +142,7 @@ class FairizedShapeSink {
 	beginShape() {}
 	endShape() {
 		if (this.lastContour.length > 2) {
-			// TT use CW for outline, being different from Clipper
-			let c = this.lastContour.reverse();
+			let c = this.lastContour;
 			c = this.alignHVKnots(c);
 			c = this.cleanupOccurrentKnots1(c);
 			c = this.cleanupOccurrentKnots2(c);
@@ -152,6 +165,7 @@ class FairizedShapeSink {
 		}
 		this.lineTo(x, y);
 	}
+
 	// Contour cleaning code
 	alignHVKnots(c0) {
 		const c = c0.slice(0);
@@ -225,7 +239,9 @@ class FairizedShapeSink {
 		return c;
 	}
 }
+
 // Disjoint set for coordinate alignment
+
 class CoordinateAligner {
 	constructor(c, lens, lensSet) {
 		this.c = c;
@@ -264,10 +280,13 @@ class CoordinateAligner {
 		}
 	}
 }
+
+// Lenses used by aligner
 const GetX = z => z.x;
 const SetX = (z, x) => (z.x = x);
 const GetY = z => z.y;
 const SetY = (z, y) => (z.y = y);
+
 function isOccurrent(zFirst, zLast) {
 	return (
 		zFirst.type === Point.Type.Corner &&
@@ -284,9 +303,4 @@ function aligned(a, b, c) {
 }
 function between(a, b, c) {
 	return (a <= b && b <= c) || (a >= b && b >= c);
-}
-export function finalizeGlyphs(cache, para, glyphStore) {
-	const skew = Math.tan(((para.slopeAngle || 0) / 180) * Math.PI);
-	regulateGlyphStore(cache, skew, glyphStore);
-	return glyphStore;
 }
