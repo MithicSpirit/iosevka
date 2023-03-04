@@ -43,6 +43,7 @@ export-glyph-names = true
     cent = "open"
     punctuation-dot = "square"
     diacritic-dot = "square"
+    partial-derivative = "curly-bar"
     lig-ltgteq = "flat"
     lig-neq = "slightly-slanted"
     lig-equal-chain = "with-notch"
