@@ -1,120 +1,120 @@
 [buildPlans.iosevka-mithic]
-family = "Iosevka Mithic"
-spacing = "fontconfig-mono"
-serifs = "sans"
+family = 'Iosevka Mithic'
+spacing = 'fontconfig-mono'
+serifs = 'sans'
 no-cv-ss = false
 no-ligation = false
 export-glyph-names = true
 
   [buildPlans.iosevka-mithic.variants]
-  inherits = "ss05"
+  inherits = 'ss05'
 
     [buildPlans.iosevka-mithic.variants.design]
-    apl-form = "enable"
-    capital-d = "standard-serifless"
-    capital-g = "toothed-serifless-hooked"
-    capital-k = "straight-serifless"
-    capital-m = "hanging"
-    a = "double-storey-serifless"
-    f = "flat-hook-crossbar-at-x-height"
-    g = "double-storey"
-    k = "straight-serifless"
-    r = "serifed"
-    t = "flat-hook"
-    long-s = "flat-hook-tailed"
-    eszet = "sulzbacher-tailed"
-    lower-delta = "flat-top"
-    capital-gamma = "top-right-serifed"
-    lower-iota = "tailed"
-    lower-lambda = "straight"
-    lower-mu = "tailed"
-    zero = "slashed"
-    four = "closed"
-    tilde = "low"
-    asterisk = "penta-low"
-    underscore = "high"
-    pilcrow = "high"
-    caret = "low"
-    brace = "straight"
-    number-sign = "upright"
-    ampersand = "closed"
-    at = "fourfold"
-    dollar = "open"
-    cent = "open"
-    punctuation-dot = "square"
-    diacritic-dot = "square"
-    partial-derivative = "curly-bar"
-    lig-ltgteq = "flat"
-    lig-neq = "slightly-slanted"
-    lig-equal-chain = "with-notch"
-    lig-hyphen-chain = "with-notch"
-    lig-double-arrow-bar = "with-notch"
-    lig-single-arrow-bar = "with-notch"
+    apl-form = 'enable'
+    capital-d = 'standard-serifless'
+    capital-g = 'toothed-serifless-hooked'
+    capital-k = 'straight-serifless'
+    capital-m = 'hanging'
+    a = 'double-storey-serifless'
+    f = 'flat-hook-crossbar-at-x-height'
+    g = 'double-storey'
+    k = 'straight-serifless'
+    r = 'serifed'
+    t = 'flat-hook'
+    long-s = 'flat-hook-tailed'
+    eszet = 'sulzbacher-tailed'
+    lower-delta = 'flat-top'
+    capital-gamma = 'top-right-serifed'
+    lower-iota = 'tailed'
+    lower-lambda = 'straight'
+    lower-mu = 'tailed'
+    zero = 'slashed'
+    four = 'closed'
+    tilde = 'low'
+    asterisk = 'penta-low'
+    underscore = 'high'
+    pilcrow = 'high'
+    caret = 'low'
+    brace = 'straight'
+    number-sign = 'upright'
+    ampersand = 'closed'
+    at = 'fourfold'
+    dollar = 'open'
+    cent = 'open'
+    punctuation-dot = 'square'
+    diacritic-dot = 'square'
+    partial-derivative = 'curly-bar'
+    lig-ltgteq = 'flat'
+    lig-neq = 'slightly-slanted'
+    lig-equal-chain = 'with-notch'
+    lig-hyphen-chain = 'with-notch'
+    lig-double-arrow-bar = 'with-notch'
+    lig-single-arrow-bar = 'with-notch'
 
     [buildPlans.iosevka-mithic.variants.italic]
-    a = "single-storey-earless-corner-serifless"
-    b = "toothless-corner"
-    d = "toothless-corner-serifless"
-    e = "rounded"
-    f = "flat-hook-extended-crossbar-at-x-height"
-    g = "earless-corner"
-    i = "serifed-flat-tailed"
-    k = "cursive-serifless"
-    l = "serifed-flat-tailed"
-    m = "earless-corner-double-arch"
-    n = "earless-corner-straight"
-    p = "earless-corner"
-    q = "earless-corner"
-    r = "serifless"
-    t = "standard"
-    u = "toothless-corner"
-    v = "cursive"
-    y = "cursive"
-    lower-delta = "rounded"
-    lower-iota = "tailed-serifed"
-    lower-lambda = "straight-turn"
-    lower-mu = "tailless"
-    lower-xi = "rounded"
-    zero = "dotted"
-    one = "no-base"
-    six = "straight-bar"
-    nine = "straight-bar"
-    underscore = "above-baseline"
-    ampersand = "upper-open"
-    at = "threefold"
-    percent = "dots"
-    bar = "force-upright"
-    ascii-single-quote = "raised-comma"
-    ascii-grave = "raised-turn-comma"
-    punctuation-dot = "round"
-    diacritic-dot = "round"
+    a = 'single-storey-earless-corner-serifless'
+    b = 'toothless-corner'
+    d = 'toothless-corner-serifless'
+    e = 'rounded'
+    f = 'flat-hook-extended-crossbar-at-x-height'
+    g = 'earless-corner'
+    i = 'serifed-flat-tailed'
+    k = 'cursive-serifless'
+    l = 'serifed-flat-tailed'
+    m = 'earless-corner-double-arch'
+    n = 'earless-corner-straight'
+    p = 'earless-corner'
+    q = 'earless-corner'
+    r = 'serifless'
+    t = 'standard'
+    u = 'toothless-corner'
+    v = 'cursive'
+    y = 'cursive'
+    lower-delta = 'rounded'
+    lower-iota = 'tailed-serifed'
+    lower-lambda = 'straight-turn'
+    lower-mu = 'tailless'
+    lower-xi = 'rounded'
+    zero = 'dotted'
+    one = 'no-base'
+    six = 'straight-bar'
+    nine = 'straight-bar'
+    underscore = 'above-baseline'
+    ampersand = 'upper-open'
+    at = 'threefold'
+    percent = 'dots'
+    bar = 'force-upright'
+    ascii-single-quote = 'raised-comma'
+    ascii-grave = 'raised-turn-comma'
+    punctuation-dot = 'round'
+    diacritic-dot = 'round'
 
   [buildPlans.iosevka-mithic.ligations]
   enables = [
-    "center-ops",
-    "arrow",
-    "arrow2",
-    "trig",
-    "eqeq",
-    "ineq",
-    "exeq",
-    "tildeeq",
-    "eqslasheq",
-    "ltgt-diamond",
-    "brst",
-    "slash-asterisk",
-    "plusplus",
-    "kern-dotty",
-    "kern-bars",
-    "logic",
-    "llgg",
-    "llggeq",
-    "bar-triggers-op-centering",
-    "html-comment",
-    "connected-underscore",
-    "connected-number-sign",
-    "connected-tilde-as-wave",
-    "connected-hyphen",
+    'center-ops',
+    'arrow',
+    'arrow2',
+    'trig',
+    'eqeq',
+    'ineq',
+    'exeq',
+    'tildeeq',
+    'eqslasheq',
+    'ltgt-diamond',
+    'brst',
+    'slash-asterisk',
+    'plusplus',
+    'kern-dotty',
+    'kern-bars',
+    'logic',
+    'llgg',
+    'llggeq',
+    'bar-triggers-op-centering',
+    'html-comment',
+    'connected-underscore',
+    'connected-number-sign',
+    'connected-tilde-as-wave',
+    'connected-hyphen',
   ]
 
 [buildPlans.iosevka-mithic.weights.thin]
@@ -170,7 +170,7 @@ css = 900
 [buildPlans.iosevka-mithic.widths.normal]
 shape = 576
 menu = 5
-css = "normal"
+css = 'normal'
 
 [collectPlans.iosevka-mithic]
-from = ["iosevka-mithic"]
+from = ['iosevka-mithic']
