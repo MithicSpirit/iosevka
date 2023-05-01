@@ -1,6 +1,6 @@
 import { Anchor } from "../geometry/anchor.mjs";
 import * as Geom from "../geometry/index.mjs";
-import { Point } from "../geometry/point.mjs";
+import { Point, Vec2 } from "../geometry/point.mjs";
 import { Transform } from "../geometry/transform.mjs";
 
 export class Glyph {
@@ -76,7 +76,7 @@ export class Glyph {
 	includeGlyph(g, copyAnchors, copyWidth) {
 		if (g instanceof Function) throw new Error("Unreachable");
 		// Combine anchors and get offset
-		let shift = { x: 0, y: 0 };
+		let shift = new Vec2(0, 0);
 		this.combineMarks(g, shift);
 		this.includeGlyphImpl(g, shift.x, shift.y);
 		if (g.isMarkSet) throw new Error("Invalid component to be introduced.");
@@ -181,6 +181,10 @@ export class Glyph {
 				throw new Error(`NaN found in anchor coord for ${id}`);
 			this.baseAnchors[id] = new Anchor(mbx, mby).transform(this.gizmo);
 		}
+	}
+	clearAnchors() {
+		this.baseAnchors = {};
+		this.markAnchors = {};
 	}
 	deleteBaseAnchor(id) {
 		delete this.baseAnchors[id];

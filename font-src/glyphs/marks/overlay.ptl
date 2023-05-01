@@ -25,13 +25,13 @@ glyph-block Mark-Overlay : begin
 		include : TildeShape
 			ttop      --  XH / 2 + tildeHeight / 2
 			tbot      --  XH / 2 - tildeHeight / 2
-			leftEnd   --  markMiddle - markExtend * 1.5
-			rightEnd  --  markMiddle + markExtend * 1.5
-			hs        --  OverlayStroke / 2
+			leftEnd   --  markMiddle - (markExtend + 0.4 * Stroke * HVContrast)
+			rightEnd  --  markMiddle + (markExtend + 0.4 * Stroke * HVContrast)
+			hs        --  [AdviceStroke 4] / 2
 
-	create-glyph 'tildeOverOnBar' : glyph-proc
+	create-glyph 'tildeOverOnExension' : glyph-proc
 		set-width 0
-		set-mark-anchor 'overlayOnBar' markMiddle (XH / 2) markMiddle (XH / 2)
+		set-mark-anchor 'overlayOnExtension' markMiddle (XH / 2) markMiddle (XH / 2)
 		include : TildeShape
 			ttop      --  XH / 2 + tildeHeight / 3
 			tbot      --  XH / 2 - tildeHeight / 3
@@ -73,6 +73,13 @@ glyph-block Mark-Overlay : begin
 		set-width 0
 		set-mark-anchor 'overlay' markMiddle (XH / 2) markMiddle (XH / 2)
 		include : HOverlayBar (markMiddle - LongJut * 0.75) (markMiddle + LongJut * 0.75) (XH / 2)
+
+	create-glyph 'dblBarOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' markMiddle (XH / 2) markMiddle (XH / 2)
+		local gap : 0.2 * CAP
+		include : HOverlayBar (markMiddle - LongJut * 0.75) (markMiddle + LongJut * 0.75) (XH / 2 + 0.5 * gap)
+		include : HOverlayBar (markMiddle - LongJut * 0.75) (markMiddle + LongJut * 0.75) (XH / 2 - 0.5 * gap)
 
 	create-glyph 'longBarOver' 0xE001 : glyph-proc
 		set-width 0
@@ -187,3 +194,60 @@ glyph-block Mark-Overlay : begin
 
 		include : VBar.m (-markExtend) (-XH / 4) (XH / 4) MarkStroke
 		include : HBar.m (-markExtend) (markExtend) 0 MarkStroke
+
+	# Half-XH marks for spacing modifiers
+	create-glyph 'upTackOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		local ext : Math.min markExtend (belowMarkTop - belowMarkBot)
+		include : VBar.m 0 (-ext) (+ext) (markFine * 2)
+		include : HBar.b (-markExtend) (+markExtend) (-ext) (markFine * 2)
+
+	create-glyph 'downTackOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		local ext : Math.min markExtend (belowMarkTop - belowMarkBot)
+		include : VBar.m 0 (-ext) (+ext) (markFine * 2)
+		include : HBar.t (-markExtend) (+markExtend) (+ext) (markFine * 2)
+
+	create-glyph 'plusOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		local ext : Math.min markExtend (belowMarkTop - belowMarkBot)
+		include : VBar.m 0 (-ext) (+ext) (markFine * 2)
+		include : HBar.m (-markExtend) (+markExtend) 0 (markFine * 2)
+
+	create-glyph 'minusOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		local ext : 0.5 * [Math.min markExtend (belowMarkTop - belowMarkBot)]
+		include : VBar.m (-markExtend) (-ext) (+ext) (markFine * 2)
+		include : VBar.m (+markExtend) (-ext) (+ext) (markFine * 2)
+		include : HBar.m (-markExtend) (+markExtend) 0 (markFine * 2)
+
+	create-glyph 'equalOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		local ext : Math.min markExtend (belowMarkTop - belowMarkBot)
+		local sw : Math.min (2 * markFine) ((2 / 3) * ext)
+		include : HBar.t (-markExtend) (+markExtend) (+ext) sw
+		include : HBar.b (-markExtend) (+markExtend) (-ext) sw
+
+	create-glyph 'rightHalfCircleOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		include : WithTransform [ApparentTranslate (-markMiddle) (-aboveMarkMid)]
+			refer-glyph 'rightHalfCircleAbove'
+
+	create-glyph 'leftHalfCircleOver' : glyph-proc
+		set-width 0
+		set-mark-anchor 'overlay' 0 0 0 0
+
+		include : WithTransform [ApparentTranslate (-markMiddle) (-aboveMarkMid)]
+			refer-glyph 'leftHalfCircleAbove'
