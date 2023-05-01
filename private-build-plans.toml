@@ -114,7 +114,7 @@ export-glyph-names = true
     'connected-underscore',
     'connected-number-sign',
     'connected-tilde-as-wave',
-    'connected-hyphen',
+    #'connected-hyphen',
   ]
 
 [buildPlans.iosevka-mithic.weights.thin]
